@@ -6,8 +6,13 @@ export const BoxModal = styled.section`
     min-height: 350px;
     border: solid 3px #5356FB;
     border-radius: 10px;
-    background-color: #19191E;
-    margin: 50% auto;
+    background: rgb(2,0,36);
+    background: radial-gradient(circle,
+        rgba(2,0,36,1) 0%, 
+        rgba(52,22,2,1) 47%, 
+        rgba(9,9,121,1) 79%, 
+        rgba(0,212,255,1) 100%);
+    margin: 20% auto;
 
     display: flex;
     flex-direction: column;
@@ -24,13 +29,26 @@ export const BoxModal = styled.section`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
         
-        img{
+        img.heroPicture{
             width: 100%;
             max-width: 200px;
             height: 70%;
             margin: 0;
             padding: 0;
+           
+        }
+
+        img.winnerBanner, img.tiedBanner{
+            width: 100%;
+            max-width: 230px;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        img.tiedBanner{
+            bottom: -15px;
         }
 
         h3{
@@ -40,7 +58,7 @@ export const BoxModal = styled.section`
             text-align: center;
             margin: 0;
             padding: 0;
-
+            z-index: 1;
         }
 
     }
@@ -53,19 +71,33 @@ export const BoxModal = styled.section`
             width: 100%;
             margin: 20px auto;
             padding: 0;
+            display: flex;
 
             li{
                 width: 90%;
                 margin: 0 auto;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
                 gap: 20px;
+                display: grid;
+                grid-template-rows: 1fr, 5fr, 1fr;
+                justify-content: center;
 
-                p{
-                    color: #5356FB;
-
+                p.powerStatsName{
+                    color: white;
+                    -webkit-text-stroke: 1px #5356FB;
                     font-weight: bolder;
+                    text-transform: uppercase;
+                    text-align: center;
+                    width: 10px;
+                    height: 230px;
+                    width:1px;
+                    word-wrap: break-word;
+                    font-family: monospace; 
+                    white-space: pre-wrap;
+                }
+
+                span{
+                    height: 30px;
+                    font-weight: bold;
                 }
             }
         }

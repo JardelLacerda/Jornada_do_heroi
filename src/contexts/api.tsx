@@ -1,6 +1,14 @@
 import { createContext, useState, ReactNode } from "react";
 import { Api } from "../providers/api";
 
+export type TPowerStats = {
+    combat: number
+    durability: number
+    intelligence: number
+    power: number
+    strength: number
+}
+
 export type TInfoCards = {
     id: number
     name: string
@@ -11,13 +19,7 @@ export type TInfoCards = {
         sm: string
         xs: string
     }
-    powerstats: {
-        combat: number
-        durability: number
-        intelligence: number
-        power: number
-        strength: number
-    }
+    powerstats: TPowerStats
     appearance: { 
         eyeColor: string
     }
@@ -35,7 +37,7 @@ export const ApiProvider = ({ children }: {children: ReactNode}) => {
 
     Api.get("").then((resp) => {
         setCardsInfos(resp.data)
-    })
+    }).catch((err) => console.log("erro", err))
    
     return (
         <ApiContext.Provider value={{cardsInfos}}>
