@@ -43,6 +43,12 @@ export const SelectContainer = styled.section`
         filter: invert(100%) sepia(100%);
     }
 
+    @media (min-width: 800px){
+        left: 15px;
+        bottom: 20px;
+        z-index: 1;
+    }
+
 `
 
 export const CardSelect = styled.div<IProps>`
