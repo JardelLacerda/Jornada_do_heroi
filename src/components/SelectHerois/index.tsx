@@ -1,10 +1,10 @@
-import { CardSelect, SelectContainer } from "./styled"
+import { SelectContainer } from "./styled"
 import SwordImage from "../../assets/sword.png"
-import CardEmpty from "../../assets/card-empty.png"
 import { useContext, useState } from "react"
-import { ServicesContext } from "../../contexts/services"
+import { ServicesContext } from "../../contexts/ServicesFigthersContext"
 import { Modal } from "@mui/material"
 import ModalBox from "../ModalBox"
+import SelectCard from "../SelectCard"
 
 const SelectHeroi = () => {
     const { fighters, selectHeroForFigth } = useContext(ServicesContext)
@@ -22,26 +22,17 @@ const SelectHeroi = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
                 closeAfterTransition
+                style={{display: "flex", justifyContent: "center", alignItems: "center"}}
             >
-               <ModalBox/>
+                <ModalBox/>
             </Modal>
-            <CardSelect heroimage={fighters[0]?.images.lg}>
-                <div className="banner">
-                    {fighters[0] && <button onClick={() => selectHeroForFigth(fighters[0])}>X</button>}
-                    <img src={CardEmpty} />
-                    <p>{fighters[0]?.name}</p>
-                </div>
-            </CardSelect>
+
+            <SelectCard fighter={fighters[0]} action={selectHeroForFigth}/>
 
             <img className="sword" src={SwordImage}/>
 
-            <CardSelect heroimage={fighters[1]?.images.lg}>
-                <div className="banner">
-                    {fighters[1] && <button onClick={() => selectHeroForFigth(fighters[1])}>X</button>}
-                    <img src={CardEmpty} />
-                    <p>{fighters[1]?.name}</p>
-                </div>
-            </CardSelect>
+            <SelectCard fighter={fighters[1]} action={selectHeroForFigth}/>
+           
         </SelectContainer>
     )
 }

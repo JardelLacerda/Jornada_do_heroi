@@ -27,6 +27,9 @@ export type TInfoCards = {
 
 export type TApiContextProps = {
     cardsInfos: TInfoCards[]
+    searchName: string
+    setSearchName: ((searchName: string) => void)
+
 }
 
 export const ApiContext = createContext<TApiContextProps>({} as TApiContextProps)
@@ -34,13 +37,16 @@ export const ApiContext = createContext<TApiContextProps>({} as TApiContextProps
 export const ApiProvider = ({ children }: {children: ReactNode}) => {
 
     const [cardsInfos, setCardsInfos] = useState<TInfoCards[]>([])
+    const [searchName, setSearchName] = useState<string>("")
 
     Api.get("").then((resp) => {
         setCardsInfos(resp.data)
     }).catch((err) => console.log("erro", err))
-   
+
+    
+
     return (
-        <ApiContext.Provider value={{cardsInfos}}>
+        <ApiContext.Provider value={{cardsInfos, setSearchName, searchName}}>
             {children}
         </ApiContext.Provider>
     )

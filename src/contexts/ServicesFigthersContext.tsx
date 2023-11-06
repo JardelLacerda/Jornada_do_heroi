@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode, createContext, useState } from "react";
-import { TInfoCards, TPowerStats } from "./api";
+import { TInfoCards, TPowerStats } from "./apiContext";
 
 export type TPlayerWinnerValues = "playerOne" | "plawerTwo" | "tied" | undefined
 

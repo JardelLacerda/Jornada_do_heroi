@@ -2,7 +2,7 @@ import { styled } from "styled-components"
 
 export const BoxModal = styled.section`
     width: 80%;
-    max-width: 600px;
+    max-width: 900px;
     min-height: 350px;
     border: solid 3px #5356FB;
     border-radius: 10px;
@@ -12,8 +12,6 @@ export const BoxModal = styled.section`
         rgba(52,22,2,1) 47%, 
         rgba(9,9,121,1) 79%, 
         rgba(0,212,255,1) 100%);
-    margin: 20% auto;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,8 +75,9 @@ export const BoxModal = styled.section`
                 width: 90%;
                 margin: 0 auto;
                 gap: 20px;
-                display: grid;
-                grid-template-rows: 1fr, 5fr, 1fr;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 justify-content: center;
 
                 p.powerStatsName{
@@ -98,6 +97,47 @@ export const BoxModal = styled.section`
                 span{
                     height: 30px;
                     font-weight: bold;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 800px){
+        width: 90%;
+        flex-direction: row;
+        height: 500px;
+
+        div.herosCards{
+            height: 300px;
+
+            img.winnerBanner{
+                max-width: 230px;
+                bottom: 45px;
+            }
+
+            img.tiedBanner{
+                bottom: 30px;
+            }
+        }
+
+        div.infos ul{
+            width: 80%;
+            flex-direction: column;
+
+            li {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                height: 30px;
+                
+                p.powerStatsName{       
+                    width: 100%;
+                    height: auto;
+                    font-size: 1rem;
+                }
+
+                span{
+                    font-size: 1rem;
                 }
             }
         }

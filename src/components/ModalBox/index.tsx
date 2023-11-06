@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { BoxModal } from "./styled"
-import { ServicesContext } from "../../contexts/services"
+import { ServicesContext } from "../../contexts/ServicesFigthersContext"
 import WinnerBanner from "../../assets/winner-banner.png"
 import TiedBanner from "../../assets/tied-banner.png"
 

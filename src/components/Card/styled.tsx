@@ -6,7 +6,7 @@ interface IProps {
 
 export const BasicCard = styled.div<IProps>`
     width: 200px;
-    height: 230px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,11 +47,15 @@ export const BasicCard = styled.div<IProps>`
         font-weight: bolder;
         text-transform: uppercase;
         -webkit-text-stroke: 1px #19191E;
+        text-align: center;
     }
 
     button{
         margin: 0;
-        padding: 5px 10px;
+        padding: 6px 13px;
+        font-weight: bold;
+        background-color: #5356FB;
+        border: solid 1px;
     }
 
 

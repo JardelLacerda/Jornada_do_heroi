@@ -1,5 +1,5 @@
-import { TInfoCards } from "../../contexts/api"
-import { ServicesContext } from "../../contexts/services"
+import { TInfoCards } from "../../contexts/apiContext"
+import { ServicesContext } from "../../contexts/ServicesFigthersContext"
 import { BasicCard } from "./styled"
 import { useContext } from "react"
 
