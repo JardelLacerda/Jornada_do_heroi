@@ -115,14 +115,14 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
 
 
     useEffect(() => {
-        if (fighters.length === 2) verifyWinner()
+        if (fighters?.length === 2) verifyWinner()
 
     }, [fighters])
 
     useEffect(() => {
         const historiLocal: THistoric[] = JSON.parse(localStorage.getItem("historic") as string)
 
-        if(historiLocal.length > 0) setHistoric([...historiLocal])
+        if(historiLocal?.length > 0) setHistoric([...historiLocal])
 
     }, [])
 
