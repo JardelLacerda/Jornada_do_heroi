@@ -18,7 +18,7 @@ const CardsContainer = () => {
         <Main>
             {filterHerosByName().length > 0 ? filterHerosByName().map((card) => {
                 return <Card cards={card} key={card.id}/>
-            }) : <h2 className="noSearch">Não Foi possível encontrar o heroi de nome: {searchName}</h2>}
+            }) : <h2 className="noSearch">Herois Não encontrados</h2>}
         </Main>
     )
 }

@@ -1,13 +1,15 @@
-import { ReactElement, ReactNode, createContext, useState } from "react";
+import { ReactElement, ReactNode, createContext, useState, useEffect } from "react";
 import { TInfoCards, TPowerStats } from "./apiContext";
 
 export type TPlayerWinnerValues = "playerOne" | "plawerTwo" | "tied" | undefined
 
 export type TServiceContextProps = {
-    fighters: TInfoCards[]
     selectHeroForFigth: ((card: TInfoCards) => void)
-    verifyWinnerAndRenderStats:(() => ReactElement[])
+    counterWinnerAndRenderStats:(() => ReactElement[])
+    savedFigther: (() => void)
+    fighters: TInfoCards[]
     playerWinner: TPlayerWinnerValues
+    
 }
 
 export type TPowerStatsValid = "combat" | "durability" | "intelligence" | "power" | "strength"
@@ -17,6 +19,7 @@ export const ServicesContext = createContext<TServiceContextProps>({} as TServic
 export const ServicesProvider = ({children}: {children: ReactNode}) => {
 
     const [fighters, setFighters] = useState<TInfoCards[]>([])
+    const [historic, setHistoric] = useState<TInfoCards[][]>([])
 
     const selectHeroForFigth = (card: TInfoCards) => {
         
@@ -33,15 +36,12 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
     const personTwoPowers: TPowerStats =  fighters[1]?.powerstats
 
     const [playerWinner, setPlayerWinner] = useState<TPlayerWinnerValues>()
-    
-    const verifyWinnerAndRenderStats = ():ReactElement[] => {
-        const resultsForStatsPersonOne: string[] = [] // Winner, Loser, Tied
+
+    const counterWinnerAndRenderStats = ():ReactElement[] => {
         
         const elements = Object.keys(personOnePowers).map((ps) => {
             const personOneWinInStats = personOnePowers[ps as TPowerStatsValid] > personTwoPowers[ps as TPowerStatsValid] ? "win" : 
             personOnePowers[ps as TPowerStatsValid] == personTwoPowers[ps as TPowerStatsValid] ? "tied" : "lose"
-
-            resultsForStatsPersonOne.push(personOneWinInStats)
 
             const styled1 = {
                 color: `${personOneWinInStats === "lose" ? `red` : personOneWinInStats === "win" && `green`}`,
@@ -61,6 +61,21 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
             )
         })
 
+        return elements
+    }
+
+    const verifyWinner = () => {
+        // Codigo Duplicado, preciso melhorar essas duas funções verifyWinner e counterWinnerAndRenderStats - A Fazer
+        const resultsForStatsPersonOne: string[] = [] // Winner, Loser, Tied
+
+        Object.keys(personOnePowers).map((ps) => {
+            
+            const personOneWinInStats = personOnePowers[ps as TPowerStatsValid] > personTwoPowers[ps as TPowerStatsValid] ? "win" : 
+            personOnePowers[ps as TPowerStatsValid] == personTwoPowers[ps as TPowerStatsValid] ? "tied" : "lose"
+
+            resultsForStatsPersonOne.push(personOneWinInStats)
+        })
+
         let countWInsPersonOne = 0
         
         resultsForStatsPersonOne.forEach((item) => {
@@ -72,15 +87,42 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
         if(countWInsPersonOne === 0) setPlayerWinner("tied")
         else if(countWInsPersonOne > 0) setPlayerWinner("playerOne")
         else setPlayerWinner("plawerTwo")
-
-        return elements
     }
 
+
+    const savedFigther = ():void => {
+
+        const alreadyExist = historic.find((item) => {
+            if(
+            (item[0].id === fighters[0].id || item[0].id === fighters[1].id) && 
+            (item[0].id === fighters[1].id || item[1].id === fighters[1].id)
+            ){
+                return true
+            }
+
+            return false
+        })
+
+
+        if(alreadyExist) return
+        setHistoric([...historic, fighters])
+    
+        localStorage.setItem("historic", JSON.stringify(historic))
+
+        return
+    }
+
+
+    useEffect(() => {
+        if (fighters.length === 2) verifyWinner()
+        
+    }, [fighters])
 
     return ( 
         <ServicesContext.Provider value={{
             selectHeroForFigth,
-            verifyWinnerAndRenderStats,
+            counterWinnerAndRenderStats,
+            savedFigther,
             fighters,
             playerWinner
             }}>

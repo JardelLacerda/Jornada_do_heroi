@@ -1,17 +1,17 @@
 import AsideContainer from "../../components/AsideContainer"
 import CardsContainer from "../../components/CardsContainer"
+import ContainerBase from "../../components/ContainerBase"
 import SelectHeroi from "../../components/SelectHerois"
-import { Container } from "./styled"
 
 
 const HomePage = () => {
     
     return(
-        <Container>
+        <ContainerBase>
             <AsideContainer/>
             <CardsContainer/>
             <SelectHeroi/>
-        </Container>
+        </ContainerBase>
     )
 }
 

@@ -8,7 +8,7 @@ const Card = ({cards}: {cards: TInfoCards}) => {
     const { selectHeroForFigth, fighters } = useContext(ServicesContext)
 
     return (
-        <BasicCard bgcolor={cards.appearance.eyeColor} onDoubleClick={() => selectHeroForFigth(cards)}>
+        <BasicCard $bgColor={cards.appearance.eyeColor} onDoubleClick={() => selectHeroForFigth(cards)}>
             <figure>
                 <img src={cards.images.lg} />
             </figure>

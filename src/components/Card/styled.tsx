@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 
 interface IProps {
-    bgcolor: string
+    $bgColor: string
 }
 
 export const BasicCard = styled.div<IProps>`
@@ -15,8 +15,8 @@ export const BasicCard = styled.div<IProps>`
     padding: 5px 10px;
     border-radius: 15px 15px 0 0;
     border: solid 1px white;
-    ${({bgcolor}) => `
-        background-color: ${bgcolor};
+    ${({$bgColor}) => `
+        background-color: ${$bgColor};
     `}
     transition: 0.15s;
 

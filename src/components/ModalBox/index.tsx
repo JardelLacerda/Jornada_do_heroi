@@ -6,7 +6,8 @@ import TiedBanner from "../../assets/tied-banner.png"
 
 const ModalBox = () => {
 
-    const {fighters, verifyWinnerAndRenderStats, playerWinner} = useContext(ServicesContext)
+    const {fighters, counterWinnerAndRenderStats, playerWinner} = useContext(ServicesContext)
+    
     return (
         <BoxModal>
             <div className="herosCards">
@@ -17,7 +18,7 @@ const ModalBox = () => {
             </div>
             <div className="infos">
                 <ul>
-                    {verifyWinnerAndRenderStats()}
+                    {counterWinnerAndRenderStats()}
                 </ul>
             </div>
             <div className="herosCards">

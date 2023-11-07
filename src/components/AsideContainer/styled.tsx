@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 
 export const ContainerAside = styled.section`
+    transition: 0.5s;
 `
 
 export const MenuHamburguer = styled.button`
@@ -18,6 +19,7 @@ export const MenuHamburguer = styled.button`
     z-index: 1;
     border-radius: 0;
     outline: none;
+    transition: 0.5s;
 
     @media (min-width: 800px){
         display: none;

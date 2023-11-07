@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 interface IProps {
-    heroimage: string
+    $heroimage: string
 }
 
 export const CardSelect = styled.div<IProps>`
@@ -10,8 +10,8 @@ export const CardSelect = styled.div<IProps>`
         border-radius: 5px;
 
         .banner{
-            ${({heroimage}) => 
-                heroimage ? `background-image: url(${heroimage});` 
+            ${({$heroimage}) => 
+                $heroimage ? `background-image: url(${$heroimage});` 
                 : `background-image: none`
             }
             width: 100%;

@@ -2,7 +2,7 @@ import { Aside } from "./styled"
 import SearchImage from "../../assets/search-len.png"
 import { MouseEventHandler, useContext } from "react"
 import { ApiContext } from "../../contexts/apiContext"
-
+import { Link } from "react-router-dom"
 
 const AsideComponent = ({toggleOpenMenu}: {toggleOpenMenu?: MouseEventHandler<HTMLButtonElement> | undefined}) => {
     const {setSearchName} = useContext(ApiContext)
@@ -18,7 +18,8 @@ const AsideComponent = ({toggleOpenMenu}: {toggleOpenMenu?: MouseEventHandler<HT
                 </div>
 
                 <ul>
-                    <li>home page</li>
+                    <li><Link className="link" to="/">home page</Link></li>
+                    <li><Link className="link" to="/historic">Historico</Link></li>
                 </ul>
             </nav>
 

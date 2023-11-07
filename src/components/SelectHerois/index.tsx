@@ -7,10 +7,13 @@ import ModalBox from "../ModalBox"
 import SelectCard from "../SelectCard"
 
 const SelectHeroi = () => {
-    const { fighters, selectHeroForFigth } = useContext(ServicesContext)
+    const { fighters, selectHeroForFigth, savedFigther } = useContext(ServicesContext)
 
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => {
+        setOpen(true)
+        savedFigther()
+    };
     const handleClose = () => setOpen(false);
 
     return (
@@ -24,7 +27,9 @@ const SelectHeroi = () => {
                 closeAfterTransition
                 style={{display: "flex", justifyContent: "center", alignItems: "center"}}
             >
-                <ModalBox/>
+                <>
+                    <ModalBox/>
+                </>
             </Modal>
 
             <SelectCard fighter={fighters[0]} action={selectHeroForFigth}/>

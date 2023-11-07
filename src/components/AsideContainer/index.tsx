@@ -1,10 +1,12 @@
 import AsideComponent from "../AsideComponent";
 import { MenuHamburguer, ContainerAside } from "./styled"
 
-import { useState, MouseEvent } from "react"
+import { useState, useEffect, MouseEvent } from "react"
 
 const AsideContainer = () => {
-    const [open, setOpen] = useState<boolean>(true)
+    const [open, setOpen] = useState<boolean>(false)
+    const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
 
     const toggleOpenMenu = (event: MouseEvent):void => {
         const {tagName} = event.target as HTMLElement 
@@ -14,12 +16,23 @@ const AsideContainer = () => {
         }
     }
 
+    useEffect(() => {
+        const handleResize = () => {
+          setWindowWidth(window.innerWidth);
+        };
+    
+        window.addEventListener("resize", handleResize);
+    
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     return (
         <ContainerAside>
             <MenuHamburguer onClick={toggleOpenMenu}>Menu</MenuHamburguer>
 
-            {open && <AsideComponent toggleOpenMenu={toggleOpenMenu}/>}
+            {(open || windowWidth >= 800) &&  <AsideComponent toggleOpenMenu={toggleOpenMenu}/>}
         </ContainerAside>
     )
 }
