@@ -40,10 +40,12 @@ export const ApiProvider = ({ children }: {children: ReactNode}) => {
     const [searchName, setSearchName] = useState<string>("")
 
     Api.get("").then((resp) => {
-        setCardsInfos(resp.data)
-    }).catch((err) => console.log("erro", err))
+        if (resp && resp.status === 200) return setCardsInfos(resp.data)
 
-    
+        console.log("Erro na resposta da API:", resp);
+        
+    }).catch((err) => console.log("erro api", err))
+
 
     return (
         <ApiContext.Provider value={{cardsInfos, setSearchName, searchName}}>

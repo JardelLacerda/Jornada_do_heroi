@@ -11,7 +11,7 @@ Api.interceptors.response.use((response) => {
 
     (error) => {
         if (error.response && error.response.status === 429) {
-            return
+            return console.log(error.message)
         } else {
             return Promise.reject(error)
         }

@@ -48,24 +48,21 @@ export const Aside = styled.section`
             margin: 0;
         }
 
-        ul {
+        div.navegation {
             margin: 0;
             padding: 0;
             list-style: none;
             display: flex;
             flex-direction: column;
         
-            li{
+            .link{
                 text-align: center;
                 border-radius: 10px;
                 background-color: #5356FB;
                 padding: 5px 15px;
                 cursor: pointer;
                 margin: 20px 0;
-                
-                a{
-                    color: white;
-                }
+                color: white;
             }
         }
 
