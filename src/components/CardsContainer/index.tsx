@@ -13,10 +13,12 @@ const CardsContainer = () => {
 
     return herosFilterArray
     }
+
+    const cards = filterHerosByName()
     
     return(
         <MainContainer>
-            {filterHerosByName()?.length > 0 ? filterHerosByName().map((card) => {
+            {cards?.length > 0 ? cards.map((card) => {
                 return <Card cards={card} key={card.id}/>
             }) : <h2 className="noSearch">Herois Não encontrados</h2>}
         </MainContainer>

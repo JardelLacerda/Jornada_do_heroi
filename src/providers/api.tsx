@@ -1,7 +1,6 @@
 import axios from "axios"
 
-
-const baseURL = "http://homologacao3.azapfy.com.br/api/ps/metahumans"
+const baseURL = "https://homologacao3.azapfy.com.br/api/ps/metahumans"
 
 const Api = axios.create({baseURL})
 

@@ -6,9 +6,8 @@ import HistoricContainer from "../../components/historicContainer"
 
 const HistoricPage = () => {
 
-   
-
     return (
+        
         <ContainerBase>
             <AsideContainer/>
             <HistoricContainer/>
