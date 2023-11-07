@@ -13,9 +13,10 @@ const Card = ({cards}: {cards: TInfoCards}) => {
                 <img src={cards.images.lg} />
             </figure>
 
-            <h3>{cards.name}</h3>
+            <h2>{cards.name} #{cards.id}</h2>
 
             <button onClick={() => selectHeroForFigth(cards)}>{fighters.find((item) => item.id === cards.id) === undefined ? "Escolher" : "Remover"}</button>
+
         </BasicCard>
     )
 }

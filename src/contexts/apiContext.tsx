@@ -1,5 +1,5 @@
 import { createContext, useState, ReactNode } from "react";
-import { Api } from "../providers/api";
+import Api  from "../providers/api";
 
 export type TPowerStats = {
     combat: number

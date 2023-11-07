@@ -3,12 +3,18 @@ import { TInfoCards, TPowerStats } from "./apiContext";
 
 export type TPlayerWinnerValues = "playerOne" | "plawerTwo" | "tied" | undefined
 
+export type THistoric = {
+    winner: TPlayerWinnerValues
+    data: TInfoCards[]
+}
+
 export type TServiceContextProps = {
     selectHeroForFigth: ((card: TInfoCards) => void)
     counterWinnerAndRenderStats:(() => ReactElement[])
     savedFigther: (() => void)
     fighters: TInfoCards[]
     playerWinner: TPlayerWinnerValues
+    historic: THistoric[]
     
 }
 
@@ -19,7 +25,8 @@ export const ServicesContext = createContext<TServiceContextProps>({} as TServic
 export const ServicesProvider = ({children}: {children: ReactNode}) => {
 
     const [fighters, setFighters] = useState<TInfoCards[]>([])
-    const [historic, setHistoric] = useState<TInfoCards[][]>([])
+    const [historic, setHistoric] = useState<THistoric[]>([])
+    const [playerWinner, setPlayerWinner] = useState<TPlayerWinnerValues>()
 
     const selectHeroForFigth = (card: TInfoCards) => {
         
@@ -35,7 +42,6 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
     const personOnePowers: TPowerStats =  fighters[0]?.powerstats
     const personTwoPowers: TPowerStats =  fighters[1]?.powerstats
 
-    const [playerWinner, setPlayerWinner] = useState<TPlayerWinnerValues>()
 
     const counterWinnerAndRenderStats = ():ReactElement[] => {
         
@@ -89,25 +95,20 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
         else setPlayerWinner("plawerTwo")
     }
 
-
     const savedFigther = ():void => {
 
-        const alreadyExist = historic.find((item) => {
-            if(
-            (item[0].id === fighters[0].id || item[0].id === fighters[1].id) && 
-            (item[0].id === fighters[1].id || item[1].id === fighters[1].id)
-            ){
-                return true
-            }
-
-            return false
-        })
-
+        const alreadyExist = historic.find((item) => 
+        (item.data[0].id === fighters[0].id || item.data[0].id === fighters[1].id) && 
+        (item.data[0].id === fighters[1].id || item.data[1].id === fighters[1].id))
 
         if(alreadyExist) return
-        setHistoric([...historic, fighters])
-    
-        localStorage.setItem("historic", JSON.stringify(historic))
+
+        const newHistoric: THistoric = {
+            data: fighters,
+            winner: playerWinner
+        }
+
+        setHistoric([...historic, newHistoric])
 
         return
     }
@@ -115,8 +116,19 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
 
     useEffect(() => {
         if (fighters.length === 2) verifyWinner()
-        
+
     }, [fighters])
+
+    useEffect(() => {
+        const historiLocal: THistoric[] = JSON.parse(localStorage.getItem("historic") as string)
+
+        if(historiLocal.length > 0) setHistoric([...historiLocal])
+
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("historic", JSON.stringify(historic))
+    }, [historic])
 
     return ( 
         <ServicesContext.Provider value={{
@@ -124,7 +136,8 @@ export const ServicesProvider = ({children}: {children: ReactNode}) => {
             counterWinnerAndRenderStats,
             savedFigther,
             fighters,
-            playerWinner
+            playerWinner,
+            historic
             }}>
             {children}
         </ServicesContext.Provider>

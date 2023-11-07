@@ -3,4 +3,21 @@ import axios from "axios"
 
 const baseURL = "http://homologacao3.azapfy.com.br/api/ps/metahumans"
 
-export const Api = axios.create({baseURL})
+const Api = axios.create({baseURL})
+
+Api.interceptors.response.use((response) => {
+      return response
+    },
+
+    (error) => {
+        if (error.response && error.response.status === 429) {
+            return
+        } else {
+            return Promise.reject(error)
+        }
+    }
+)
+
+
+
+export default Api

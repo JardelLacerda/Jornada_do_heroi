@@ -3,7 +3,11 @@ import ContainerBase from "../../components/ContainerBase"
 import HistoricContainer from "../../components/historicContainer"
 
 
+
 const HistoricPage = () => {
+
+   
+
     return (
         <ContainerBase>
             <AsideContainer/>

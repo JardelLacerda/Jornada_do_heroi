@@ -9,7 +9,7 @@ export const Main = styled.main`
     margin-top: 15px;
     width: 100%;
     height: 100%;
-    
+    margin: 70px 0;
     h2.noSearch{
         font-weight: bold;
         text-align: center;
@@ -17,7 +17,7 @@ export const Main = styled.main`
 
     @media (min-width: 800px){
         margin: 20px 50px 0 0 ;
-        width: 90%;
+        width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
         align-items: flex-start;
